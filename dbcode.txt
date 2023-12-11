@@ -1,0 +1,32 @@
+CREATE TABLE users (
+    id         INTEGER       PRIMARY KEY AUTOINCREMENT,
+    user_id    INTEGER       UNIQUE
+                             NOT NULL,
+    username   VARCHAR (255) NOT NULL,
+    first_name VARCHAR (255) NOT NULL,
+    last_name  VARCHAR (255) NOT NULL
+);
+
+
+CREATE TABLE crops (
+    id                     INTEGER       PRIMARY KEY AUTOINCREMENT,
+    user_id                INTEGER       NOT NULL
+                                         REFERENCES users (id) ON DELETE CASCADE,
+    crop_name              VARCHAR (255) NOT NULL,
+    crop_quantity_produced VARCHAR (255) NOT NULL,
+    crop_expense           DECIMAL       NOT NULL,
+    crop_price             DECIMAL       NOT NULL
+);
+
+
+CREATE TABLE weather_and_soil_of_crop (
+    id            INTEGER PRIMARY KEY AUTOINCREMENT,
+    crop_id               NOT NULL
+                          REFERENCES crops (id) ON DELETE CASCADE,
+    temperature   DECIMAL NOT NULL,
+    pressure      DECIMAL NOT NULL,
+    soil_moisture DECIMAL NOT NULL,
+    humidity      DECIMAL NOT NULL,
+    radiaiton     DECIMAL NOT NULL,
+    precipitation DECIMAL NOT NULL
+);
